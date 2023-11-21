@@ -86,6 +86,18 @@ button {
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
+  /* opacity: 0; */
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  
+}
+
+/* CSS for letter elements with transition properties */
+
+
+.letter.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .space {
@@ -119,6 +131,32 @@ button {
   font-size: var(--font-size-medium);
 }
 
+/* Styles for the reset buttons */
+.btn__reset-success,
+.btn__reset-failure {
+    display: none;
+    margin: 50px auto;
+    padding: 8px;
+    background-color: var(--color-neutral);
+    color: var(--color-neutral-light);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Show reset buttons on success and failure */
+.win .btn__reset-success,
+.lose .btn__reset-failure {
+    display: inline-block;
+}
+
+/* Style the reset buttons on hover */
+.btn__reset-success:hover,
+.btn__reset-failure:hover {
+    background-color:var(--color-start);
+    color: #0c0c0c;
+}
+
 /* Overlay */
 
 #overlay {
@@ -150,14 +188,14 @@ button {
   background-color: var(--color-win);
 }
 
-.win a {
+/* .win a {
   color: var(--color-win);
-}
+} */
 
 .lose {
   background-color: var(--color-lose);
 }
 
-.lose a {
+/* .lose a {
   color: var(--color-lose);
-}
+} */

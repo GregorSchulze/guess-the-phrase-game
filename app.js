@@ -1,64 +1,212 @@
-// 2. Get the elements you’ll need from your HTML
-const qwerty= document.querySelector("qwerty");
-const phrase= document.querySelector("phrase");
-let missed= 0;
 
-// 3. Attach an event listener to the “Start Game” button to hide the start screen overlay.
-const overlay = document.getElementById('overlay');
+// Get HTML elements
+const keyboard = document.getElementById('qwerty');
+const phraseDisplay = document.getElementById('phrase');
+let missedGuesses = 0;
+
+// Hide start button
 const startButton = document.querySelector('.btn__reset');
+const overlay = document.getElementById('overlay');
 
-startButton.addEventListener('click', () => {
-    overlay.style.display = 'none';
-});
-
-// 4. Create a phrases
-const phrases= [
-"Der junge Vogel fängt den Wurm",
-"Hochmut kommt vor dem Fall",
-"Eine Hand wäscht die andere",
-"Reden ist Silber Schweigen ist Gold",
-"Alles hat ein Ende nur die Wurst hat zwei"
+// Array of phrases
+const phrases = [
+    "This is a sample phrase",
+    "Another example here",
+    "A third phrase with spaces",
+    "Hello World",
+    "Coding is fun"
 ];
 
-// 5. Create a getRandomPhraseAsArray function.
- function getRandomPhraseAsArray (arr) {
-    const randomIndex= () => Math.floor(Math.random) * arr.length;
-    const randomPhrase= arr[randomIndex];
-    const charArray= randomPhrase.split("");
-    return charArray;
- }
 
-// 6. Set the game display.
-const randomPhraseArray = getRandomPhraseAsArray(phrases);
-console.log(randomPhraseArray);
+// Event listener for the "Start Game" button
+startButton.addEventListener('click', () => {
+    overlay.classList.remove('show');
+    overlay.style.display = 'none'; // Hide the overlay
 
-function addPhraseToDisplay (arr) {
-    const phraseList = document.querySelector('#phrase ul');
-    phraseList.innerHTML = '';
+    // Show the phrase when starting a new game
+    showPhrase();
 
-    for (i= 0; i<arr.length; i++) {
-        const character= arr[i];
-        const li= document.createElement("li");
-        li.textContent= character;
-        // Überprüfung ob es ein Buchstabe oder eine Leerstelle ist und dann die passende Klasse hinzufügen
-        if (character !== " ") {
-            li.classList.add("letter");
+    resetGame(); // Reset the game
+    phraseArray = getRandomPhraseAsArray(phrases);
+    addPhraseToDisplay(phraseArray);
+    
+});
+
+// Event listener for the "Play Again (Success)" button
+document.querySelector('.btn__reset-success').addEventListener('click', () => {
+    resetGame(); // Reset the game
+    overlay.style.display = 'none'; // Hide the overlay
+    addPhraseToDisplay(phraseArray); // Generate and display a new random phrase
+});
+
+// Event listener for the "Try Again (Failure)" button
+document.querySelector('.btn__reset-failure').addEventListener('click', () => {
+    resetGame(); // Reset the game
+    overlay.style.display = 'none'; // Hide the overlay
+    addPhraseToDisplay(phraseArray); // Generate and display a new random phrase
+});
+
+// Function to reset the game state
+function resetGame() {
+    missedGuesses = 0;
+    const tries = document.querySelectorAll('.tries img');
+    tries.forEach(heart => {heart.src = 'images/liveHeart.png';
+    heart.style.display = 'inline-block'; // Show the hearts
+});
+
+    // Hide the phrase elements
+    const phraseList = document.querySelectorAll('#phrase ul li');
+    phraseList.forEach(li => li.remove());
+
+    // Generate and set a new random phrase
+    phraseArray = getRandomPhraseAsArray(phrases);
+    addPhraseToDisplay(phraseArray);
+
+    const keyboardButtons = document.querySelectorAll('#qwerty button');
+    keyboardButtons.forEach(button => {
+        button.classList.remove('chosen');
+        button.disabled = false;
+    });
+}
+
+
+// Function to get a random phrase as an array of characters
+const getRandomPhraseAsArray = arr => {
+    let randomIndex = Math.floor(Math.random() * arr.length);
+    let randomPhrase = arr[randomIndex];
+    return randomPhrase.split(''); // Return the selected phrase as an array of characters
+};                                 //Split the phrase into an array of characters
+
+
+
+//Function to set up the game display
+const addPhraseToDisplay = arr => {
+    const ul = document.querySelector('ul');
+    ul.innerHTML = '';
+
+    for (let i = 0; i < arr.length; i++) {
+        const li = document.createElement('li');
+        li.textContent = arr[i];
+        ul.append(li);
+
+        if (li.textContent.toLowerCase() !== ' ') {
+            li.classList.add('letter');
         } else {
-            li.classList.add("space");
+            li.classList.add('space');
         }
-
-        phraseList.appendChild(li);
     }
 
 }
 
-// 7. Create a checkLetter function.
 
-// 8. Add an event listener to the keyboard.
 
-// 9. Count the missed guesses in the game.
 
-// 10. Create a checkWin function.
 
-// 11. If you're having trouble with this project, make sure you take a look at this great study guide:
+//Function to check if a letter is in the phrase
+
+const checkLetter = button => {
+    const phraseLetters = document.querySelectorAll('.letter') // Store all of the li elements -created in addPhraseToDisplay
+    let match = null;
+
+    phraseLetters.forEach((letter) => {
+        if (letter.textContent.toLowerCase() === button.textContent.toLowerCase()) {
+            letter.classList.add('show'); // Show the letter
+            match = letter.textContent;
+        }
+    });
+
+    return match;
+}
+
+//Event listener for keyboard clicks
+
+keyboard.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON' && !e.target.classList.contains('chosen')) {
+        const button = e.target;
+        button.classList.add('chosen'); // Mark the chosen letter
+        button.disabled = true; // Disable the clicked button
+
+        const letterGuessed = checkLetter(button);
+
+        if (!letterGuessed) {
+            const tries = document.querySelectorAll('.tries');
+            const lostHeart = document.createElement('img');
+            lostHeart.src = 'images/lostHeart.png';
+            tries[missedGuesses].innerHTML = '';
+            tries[missedGuesses].appendChild(lostHeart);
+            missedGuesses++; // Increase missed count and display a lost heart
+        }
+        checkWin();// Check if the game is won or lost
+    }
+
+})
+
+// check if the game has been won or lost
+const checkWin = () => {
+    const letterElements = document.querySelectorAll('.letter');
+    const showElements = document.querySelectorAll('.show');
+
+    if (letterElements.length === showElements.length) {
+
+        overlay.className = 'win';
+        overlay.style.display = 'flex';
+        overlay.querySelector('.title').textContent = 'Congratulations! You won!';
+        startButton.remove();
+
+
+        // Hide the phrase when displaying the win screen
+        hidePhrase();
+
+        const buttons = document.querySelectorAll('.chosen');
+        buttons.forEach(function (element) {
+            element.classList.remove('chosen');
+            element.disabled = false;
+        });
+    } else if (missedGuesses >= 5) {
+        overlay.className = 'lose';
+        overlay.style.display = 'flex';
+        overlay.querySelector('.title').textContent = 'Sorry, You Lose. Try Again!';
+        startButton.remove()
+
+
+        // Hide the phrase when displaying the lose screen
+        hidePhrase();
+
+        const buttons = document.querySelectorAll('.chosen');
+        buttons.forEach(function (element) {
+            element.classList.remove('chosen');
+            element.disabled = false;
+        });
+    }
+}
+
+// Function to hide the phrase
+function hidePhrase() {
+    const phraseList = document.querySelectorAll('#phrase ul li');
+    phraseList.forEach(li => li.style.display = 'none');
+}
+
+// Function to show the phrase
+function showPhrase() {
+    const phraseList = document.querySelectorAll('#phrase ul li');
+    phraseList.forEach(li => li.style.display = 'list-item');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
