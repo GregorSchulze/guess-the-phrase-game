@@ -125,14 +125,8 @@ startButton.addEventListener("click", () => {
 });
 
 function resetGame() {
-    let phraseList= document.querySelector("#phrase ul");
+    const phraseList= document.querySelector("#phrase ul");
     phraseList.innerHTML= "";
-
-    const tries= document.querySelectorAll(".tries");
-    for (let i=0; i<tries.length; i++) {
-        const heartImage= tries[i].querySelector("img");
-        heartImage.src= "images/liveHeart.png";
-    }
 
     const buttons= keyboard.querySelectorAll("button");
     for (let i=0; i<buttons.length; i++) {
@@ -140,10 +134,15 @@ function resetGame() {
         button.classList.remove("chosen");
         button.disabled= false;
     }
-
+    
     missed= 0;
 
-    const newRandomPhraseArray = getRandomPhraseAsArray(phrases);
-    addPhraseToDisplay(newRandomPhraseArray)
-    console.log(newRandomPhraseArray);
+    const tries= document.querySelectorAll(".tries");
+    for (let i=0; i<tries.length; i++) {
+    const heartImage= tries[i].querySelector("img");
+    heartImage.src= "images/liveHeart.png";
+    }
+
+    const newPhraseArray = getRandomPhraseAsArray(phrases);
+    addPhraseToDisplay(newPhraseArray); 
 }
