@@ -13,7 +13,7 @@ startButton.addEventListener("click", (e) => {
 // 4.
 const arrOfPhrases = [
     'Eine Schwalbe macht noch keinen Sommer',
-    'Alter schuetzt vor der Liebe nicht aber Liebe vor dem Altern.',
+    'Alter schuetzt vor der Liebe nicht aber Liebe vor dem Altern',
     'Wer nicht wagt der nicht gewinnt',
     'Alte Fuechse gehen schwer in die Falle',
     'Auch ein blindes Huhn findet mal ein Korn'
