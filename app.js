@@ -11,12 +11,12 @@ startButton.addEventListener("click", (e) => {
 });
 
 // 4.
-const phrases = [
-    'Abends werden die Faulen fleisig',
-    'Alle Flüsse fließen ins Meer',
-    'Wo gehobelt wird da fallen Spaene',
-    'Viele Koeche verderben den Brei',
-    'Eine Hand waescht die andere'
+const arrOfPhrases = [
+    'Eine Schwalbe macht noch keinen Sommer',
+    'Alter schuetzt vor der Liebe nicht aber Liebe vor dem Altern.',
+    'Wer nicht wagt der nicht gewinnt',
+    'Alte Fuechse gehen schwer in die Falle',
+    'Auch ein blindes Huhn findet mal ein Korn'
 ];
 
 // 5.
@@ -27,7 +27,7 @@ function getRandomPhraseAsArray(arr){
     return randomArray.split("");
 } 
 
-const randomPhraseArray = getRandomPhraseAsArray(phrases);
+const randomPhraseArray = getRandomPhraseAsArray(arrOfPhrases);
 console.log(randomPhraseArray);
 
 // 6.
@@ -51,7 +51,7 @@ function addPhraseToDisplay(arr) {
 }
 }
 
-const phraseArray = getRandomPhraseAsArray(phrases);
+const phraseArray = getRandomPhraseAsArray(arrOfPhrases);
 addPhraseToDisplay(phraseArray); 
 
 
@@ -143,6 +143,6 @@ function resetGame() {
     heartImage.src= "images/liveHeart.png";
     }
 
-    const newPhraseArray = getRandomPhraseAsArray(phrases);
+    const newPhraseArray = getRandomPhraseAsArray(arrOfPhrases);
     addPhraseToDisplay(newPhraseArray); 
 }
