@@ -1,58 +1,64 @@
 /* Main styles */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&Roboto:300');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&Roboto:300");
 
 /* Variables */
-
 :root {
-  --color-win: #78CF82;
-  --color-lose: #D94545;
+  --color-win: #78cf82;
+  --color-lose: #d94545;
   --color-start: #5b85b7;
   --color-neutral: #445069;
-  --color-neutral-light: #D2D2D2;
-  --color-keys: #37474F;
-  --color-keys-light: #E5E5E5;
-  --font-size-large: 60px;
-  --font-size-medium: 20px;
-  --transition: all .5s ease-in-out;
+  --color-neutral-light: #d2d2d2;
+  --color-keys: #57717e;
+  --color-keys-light: #e5e5e5;
+  --font-size-large: 3rem;
+  --font-size-medium: 1.25rem;
+  --transition: all 0.3s ease-in-out;
 }
 
 /* main */
-
 * {
   box-sizing: border-box;
 }
 
 body {
-  justify-content: space-evenly;
-  flex-direction: column;
   display: flex;
-  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
 }
 
-li, ol, ul {
+li,
+ol,
+ul {
   padding: 0;
   display: inline-block;
 }
 
 h2 {
-  margin: 0;
   text-transform: uppercase;
-  font-family: 'Open Sans', sans-serif;
   font-size: var(--font-size-large);
-  margin: 0;
 }
 
 button {
-  margin: 6px;
-  border: 1px solid transparent;
-  padding: .5rem 1rem;
-  color: var(--color-keys);
-  font-size: var(--font-size-medium);
-  background-color: var(--color-keys-light);
-  border-radius: 5px;
-  -webkit-transition: var(--transition);
-  -o-transition: var(--transition);
+  margin: 0.5rem;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  color: #fff;
+  font-size: 1rem;
+  background-color: var(--color-keys);
+  border-radius: 8px;
   transition: var(--transition);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #37474f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .main-container {
@@ -78,16 +84,18 @@ button {
 /* Phrase */
 
 .letter {
-  font-size: var(--font-size-medium);
-  height: 50px;
-  width: 50px;
+  font-size: 1rem;
+  height: 40px;
+  width: 40px;
   padding: 10px;
-  margin-right: 2px;
-  margin-bottom: 2px;
+  margin: 2px;
   color: transparent;
   background: var(--color-neutral-light);
-  border-radius: 5px;
+  border-radius: 8px;
   transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .space {
@@ -96,7 +104,7 @@ button {
 
 .show {
   color: #000;
-  background-color: #76CE82;
+  background-color: #76ce82;
   font-size: 25px;
   transition: var(--transition);
 }
@@ -112,13 +120,13 @@ button {
   background: var(--color-neutral);
   border-radius: 5px;
   font-size: var(--font-size-medium);
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .btn__reset {
   padding: 8px;
   margin: 50px auto;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 5px;
   font-size: var(--font-size-medium);
 }
@@ -128,186 +136,19 @@ button {
 #overlay {
   display: flex;
   flex-direction: column;
-  position: fixed;
-  color: #FFFFFF;
+  align-items: center;
   justify-content: center;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  border-radius: 5px;
+  background-color: #0d0d0de6;
+  padding: 2rem;
 }
 
 .title {
-  color: #FFF;
-}
-
-.start {
-  background-color: var(--color-start);
-}
-
-.start a {
-  color: var(--color-win);
-}
-
-.win {
-  background-color: var(--color-win);
-}
-
-.win a {
-  color: var(--color-win);
-}
-
-.lose {
-  background-color: var(--color-lose);
-}
-
-.lose a {
-  color: var(--color-lose);
-}
-/* Main styles */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&Roboto:300');
-
-/* Variables */
-
-:root {
-  --color-win: #78CF82;
-  --color-lose: #D94545;
-  --color-start: #5b85b7;
-  --color-neutral: #445069;
-  --color-neutral-light: #D2D2D2;
-  --color-keys: #37474F;
-  --color-keys-light: #E5E5E5;
-  --font-size-large: 60px;
-  --font-size-medium: 20px;
-  --transition: all .2s ease-in-out;
-}
-
-/* main */
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  justify-content: space-evenly;
-  flex-direction: column;
-  display: flex;
-  height: 100vh;
-}
-
-li, ol, ul {
-  padding: 0;
-  display: inline-block;
-}
-
-h2 {
-  margin: 0;
-  text-transform: uppercase;
-  font-family: 'Open Sans', sans-serif;
-  font-size: var(--font-size-large);
-  margin: 0;
-}
-
-button {
-  margin: 6px;
-  border: 1px solid transparent;
-  padding: .5rem 1rem;
-  color: var(--color-keys);
-  font-size: var(--font-size-medium);
-  background-color: var(--color-keys-light);
-  border-radius: 5px;
-  -webkit-transition: var(--transition);
-  -o-transition: var(--transition);
-  transition: var(--transition);
-}
-
-.main-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
-  max-height: 900px;
-  text-align: center;
-}
-
-.section {
-  width: 100%;
-  padding: 10px;
-}
-
-/* Title */
-
-.header {
-  color: var(--color-start);
-}
-
-/* Phrase */
-
-.letter {
-  font-size: var(--font-size-medium);
-  height: 50px;
-  width: 50px;
-  padding: 10px;
-  margin-right: 2px;
-  margin-bottom: 2px;
-  color: transparent;
-  background: var(--color-neutral-light);
-  border-radius: 5px;
-  transition: var(--transition);
-
-}
-
-.space {
-  width: 15px;
-}
-
-.show {
-  color: #000;
-  background-color: #76CE82;
-  font-size: 25px;
-  transition: var(--transition);
-}
-
-/* Keyboard */
-
-.keyrow {
-  display: flex;
-  justify-content: center;
-}
-
-.chosen {
-  background: var(--color-neutral);
-  border-radius: 5px;
-  font-size: var(--font-size-medium);
-  color: #FFFFFF;
-}
-
-.btn__reset {
-  padding: 8px;
-  margin: 50px auto;
-  background: #FFFFFF;
-  border-radius: 5px;
-  font-size: var(--font-size-medium);
-}
-
-/* Overlay */
-
-#overlay {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  color: #FFFFFF;
-  justify-content: center;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 5px;
-}
-
-.title {
-  color: #FFF;
+  color: #fff;
 }
 
 .start {
